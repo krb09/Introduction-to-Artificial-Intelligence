@@ -197,7 +197,7 @@ public:
 
 	bool IsVisited(int i, int j)
 	{
-		return userBoardArray[i][j]!=-1;
+		return userBoardArray[i][j] != -1;
 	}
 
 	void SetFlag(int i, int j)
@@ -208,7 +208,7 @@ public:
 
 	int GetValue(int i, int j)
 	{
-		return userBoardArray[i][j];
+            return userBoardArray[i][j];
 	}
 
 	int GetCountUncovered()
@@ -275,6 +275,7 @@ public:
 			Point cell(i + 1, j + 1);
 			neighbors.push_back(cell);
 		}
+        
 		return neighbors;
 	}
 

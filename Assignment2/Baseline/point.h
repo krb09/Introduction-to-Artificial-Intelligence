@@ -10,6 +10,7 @@
 #define point_h
 
 #include <iostream>
+using namespace std;
 
 class Point
 {
@@ -32,6 +33,10 @@ public:
         int ReturnY()
         {
                 return y;
+        }
+        void print()
+        {
+        cout << "(" << y << "," << x << ")";
         }
 
 private:
