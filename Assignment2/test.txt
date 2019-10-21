@@ -1,56 +1,65 @@
- Board()
-    {
-        countUncovered = 0;
-        dimension = 5;
-        numberOfMines = 10;
-        
-        boardArray.resize(dimension);
-        for (int i = 0; i < dimension; i++)
-        {
-            boardArray[i].resize(dimension, 0);        //initializing all the board with 0
-        }
-        
-        userBoardArray.resize(dimension);
-        for (int i = 0; i < dimension; i++)
-        {
-            userBoardArray[i].resize(dimension, -1);        //initializing all the board with -1
-        }
-        
-        checkBoard.resize(dimension);
-        for (int i = 0; i < dimension; i++)
-        {
-            checkBoard[i].resize(dimension, false);        //initializing all the board with false
-        }
-        
-        
-        boardArray[0][0] = 10;
-        boardArray[0][1] = 10;
-        boardArray[0][2] = 10;
-        boardArray[0][3] = 2;
-        boardArray[0][4] = 0;
-        
-        boardArray[1][0] = 4;
-        boardArray[1][1] = 10;
-        boardArray[1][2] = 10;
-        boardArray[1][3] = 2;
-        boardArray[1][4] = 0;
-        
-        boardArray[2][0] = 2;
-        boardArray[2][1] = 10;
-        boardArray[2][2] = 5;
-        boardArray[2][3] = 4;
-        boardArray[2][4] = 2;
-        
-        boardArray[3][0] = 2;
-        boardArray[3][1] = 3;
-        boardArray[3][2] = 10;
-        boardArray[3][3] = 10;
-        boardArray[3][4] = 10;
-        
-        boardArray[4][0] = 1;
-        boardArray[4][1] = 10;
-        boardArray[4][2] = 3;
-        boardArray[4][3] = 3;
-        boardArray[4][4] = 2;
-        
-    }
+Enter the dimension:10
+Enter the number of mines:10
+Number of safe cells: 90
+The number of mines:10
+1. (6,3)
+2. (1,7)
+3. (9,1)
+4. (7,8)
+5. (3,5)
+6. (7,6)
+7. (0,6)
+8. (6,5)
+9. (1,4)
+10. (4,4)
+number of flagged mines: 0
+opened cells till now: 1
+Printing user board after all the deductions are made using rule1 and rule 2
+-------------------------------------------Now using CSP to infer more-----------------------------------
+number of flagged mines after csp- 0
+opened cells till now after csp- 1
+number of flagged mines: 0
+opened cells till now: 2
+Printing user board after all the deductions are made using rule1 and rule 2
+-------------------------------------------Now using CSP to infer more-----------------------------------
+number of flagged mines after csp- 0
+opened cells till now after csp- 2
+flagged mines (1,4)
+11111111111111point (1,4) flagged as mine by baseline
+flagged mines (6,3)
+2222222222222point (6,3) flagged as mine by infernece
+flagged mines (0,6)
+2222222222222point (0,6) flagged as mine by infernece
+flagged mines (3,5)
+2222222222222point (3,5) flagged as mine by infernece
+flagged mines (9,1)
+2222222222222point (9,1) flagged as mine by infernece
+number of flagged mines: 5
+opened cells till now: 90
+Printing user board after all the deductions are made using rule1 and rule 2
+-------------------------------------------Now using CSP to infer more-----------------------------------
+333333333333333point (6,5) flagged as mine by csp
+flagged mines (6,5)
+333333333333333point (4,4) flagged as mine by csp
+flagged mines (4,4)
+333333333333333point (7,8) flagged as mine by csp
+flagged mines (7,8)
+333333333333333point (7,9) flagged as mine by csp
+flagged mines (7,9)
+number of flagged mines after csp- 9
+opened cells till now after csp- 94
+flagged mines (1,7)
+2222222222222point (1,7) flagged as mine by infernece
+flagged mines (7,6)
+2222222222222point (7,6) flagged as mine by infernece
+number of flagged mines: 11
+opened cells till now: 100
+Printing user board after all the deductions are made using rule1 and rule 2
+-------------------------------------------Now using CSP to infer more-----------------------------------
+number of flagged mines- 11
+opened cells till now- 100
+number of flagged mines using baseline- 1
+number of flagged mines using inference baseline- 6
+number of flagged mines using CSP- 4
+The number of safe cells after the end: 89
+Program ended with exit code: 0
