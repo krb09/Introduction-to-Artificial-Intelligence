@@ -115,6 +115,7 @@ clf.fit(X)
 num_of_row = 240
 num_of_col = 420
 Y = [[0 for i in range(29)] for j in range(num_of_row * num_of_col)]            ## 2-D list
+print('type for y')
 print(type(Y))
 counter = 0   #for numbering the pixel
 
@@ -130,6 +131,7 @@ for pixel in X:
     pixel[:] = clf.centroids[ind][:]
     counter=counter+1
 
+print('values of Y[1] and Y[2]')
 print(Y[1])             ### rows*col * 29
 print(Y[2])
 
@@ -151,19 +153,25 @@ img2.show()
 
 
 # Convert to grayscale
+
+print('print X[0] and X[1] before grayscale')
 print(X[0][0])
 print(X[1][1])
 
+X_gray_new = [[0 for i in range(num_of_col)] for j in range( num_of_row)]
 for x in range(num_of_row):
     for y in range(num_of_col):
-        X[x][y]=round(X[x][y][0]*0.21 + X[x][y][1]*0.72 + X[x][y][2]*0.07)
+        X_gray_new[x][y]=round(X[x][y][0]*0.21 + X[x][y][1]*0.72 + X[x][y][2]*0.07)
 
 
-print(X[0][0])
-print(X[1][1])
+print('print X[0] and X[1] after grayscale')
+
+print(X_gray_new[0][0])
+print(X_gray_new[1][1])
 
 
-x=np.asarray(X)
+x=np.asarray(X_gray_new)
+print('print x shape')
 print(x.shape)
 
 
@@ -231,18 +239,21 @@ x_new=np.asarray(x_new)
 
 print("debug")
 x_new = x_new/255
+print('x_new shape:')
 print(x_new.shape)
 
+print('print x_new values')
 print(x_new[0])
 print(x_new[1])
 print(x_new[2])
 
 
-print(x_new)
 
 y_new=Y #one hot encoded output
 y_new=np.asarray(y_new)
 print("debug y new")
+
+print('y_new shapes and values')
 print(y_new.shape)
 print(y_new[0])
 print(y_new[1])
@@ -251,6 +262,8 @@ print(y_new[2])
 learning_rate=1
 num_of_hidden=50
 num_of_iter=100
+target_error = 0.1
+
 
 def act_funct(x):
     return 1/( 1+np.exp(-x) )               ##
@@ -258,29 +271,38 @@ def act_funct(x):
 def slope_act_funct(x):
     return x*(1-x)
 
-def train(x_new,y_new,num_of_hidden,num_of_iter):
+def train(x_new,y_new,num_of_hidden,num_of_iter, target_error):
 
     w1 = 2 * np.random.random((9, num_of_hidden)) - 1
+    print('w1 shape')
+    print(w1.shape)
     # print("Initial weights after input layer:")
     # print(w1)
 
+    print('w2 shape')
     w2 = 2 * np.random.random((num_of_hidden, k)) - 1
+    print(w2.shape)
     # print("Initial weights after hidden layer:")
     # print(w2)
 
     for j in range(num_of_iter):
         l1 = np.matmul(x_new, w1)
+
+        print('l1 shape before act')
         print(l1.shape)
         l1 = act_funct(l1)  # output of the hidden layer after activation
+        print('l1 shape after act')
         print(l1.shape)
 
         l2 = np.matmul(l1, w2)
+        print('l2 shape before act')
         print(l2.shape)
         l2 = act_funct(l2)  # final output after activation
-
-
+        print('l2 shape after act')
         print(l2.shape)
 
+
+        print('values of y_new and corresponding l2')
         print(y_new[0])
         print(y_new[1])
         print(l2[0])
@@ -290,8 +312,12 @@ def train(x_new,y_new,num_of_hidden,num_of_iter):
 
         loss = - (y_new * np.log(l2) + (1 - y_new) * np.log(1 - l2))
         print("Loss after " + str(j) + " iterations: ", np.mean(loss))
+        if np.mean(loss) < target_error:
+            break
+
 
         delta2 = (y_new - l2) * slope_act_funct(l2)  # element-wise multiplication
+        print('delta_shape')
         print(delta2.shape)
 
 
@@ -321,6 +347,7 @@ def results(l2,y_new):
 
     print("Accuracy: ", 1 - (np.count_nonzero(y_new - l2) / 2) / ((num_of_row) * (num_of_col)))
 
-w1,w2,l2=train(x_new,y_new,num_of_hidden,num_of_iter)
+w1,w2,l2=train(x_new,y_new,num_of_hidden,num_of_iter,target_error)
+
 
 results(l2,y_new)
