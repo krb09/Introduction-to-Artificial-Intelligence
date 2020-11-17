@@ -15,16 +15,12 @@ img = Image.fromarray(X, 'RGB')
 img.save('my1.png')
 img.show()
 
-#print(X.shape)
-#print(X[1])
 
 X = X.reshape((-1,3))    # 10800 * 3
-#print(X.shape)
 
 print('********reshape to original*********')
 X_new = X.reshape((240,420,-1))
-#print(X_new[1])
-#print(X_new.shape)
+
 
 class K_Means:
     def __init__(self, k=29, tol=0.001, max_iter=300):
@@ -56,36 +52,28 @@ class K_Means:
                     distances.append(distance)
 
                 classification = distances.index(min(distances))
-                # print('**classification**')
-                # print(classification)
                 self.classifications[classification].append(pixel)
 
             print('***classifications******')
-            #print(self.classifications[2])
-            #print(self.classifications)
+            
 
             print('***printing self-centroids****')
             prev_centroids = self.centroids[:]
-            #print(self.centroids)
-            #print(prev_centroids)
+            
 
 
             for classification in self.classifications:
                 self.centroids[classification] = np.around(np.average(self.classifications[classification],axis=0))
 
-            #print(type(self.centroids))
 
 
             print('***after classifications*****')
-            #print(self.centroids)
 
             check_tol = True
 
             size = len(prev_centroids)
-            #print(size)
-            #print(len(self.centroids))
+           
             for c in range(0,size):
-                #print('****start of checking for tolerance****')
                 original_centroid = prev_centroids[c]
                 current_centroid = self.centroids[c]
 
@@ -102,15 +90,6 @@ clf = K_Means()
 
 clf.fit(X)
 
-#print(clf.centroids)
-#print(len(clf.centroids))
-
-
-
-#print(type(X[1]))
-#print(type(clf.centroids[1]))
-
-# 100800 * 9 matrix declare with all 9 col = 0
 
 num_of_row = 240
 num_of_col = 420
@@ -142,14 +121,6 @@ X = X.reshape((240,420,-1))
 img2 = Image.fromarray(X, 'RGB')
 img2.save('my.png')
 img2.show()
-
-
-##### X final image
-##### X ( 3D 240 * 420 * 3)
-
-
-
-
 
 
 # Convert to grayscale
